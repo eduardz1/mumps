@@ -121,7 +121,7 @@ set(FETCHCONTENT_QUIET no)
 
 CPMAddPackage(
   NAME MUMPS_upstream
-  URL ${url}
+  URL ${mumps_url}
   DOWNLOAD_ONLY TRUE
 )
 
