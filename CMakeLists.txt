@@ -113,13 +113,17 @@ message(STATUS "MUMPS LAPACK_VENDOR: ${LAPACK_VENDOR}")
 message(STATUS "MUMPS SCALAPACK_VENDOR: ${SCALAPACK_VENDOR}")
 
 # --- download MUMPS source
-include(FetchContent)
+include(cmake/CPM.cmake)
 
 set(mumps_url "https://mumps-solver.org/MUMPS_${MUMPS_UPSTREAM_VERSION}.tar.gz")
 
 set(FETCHCONTENT_QUIET no)
 
-FetchContent_Populate(${PROJECT_NAME} URL ${mumps_url})
+CPMAddPackage(
+  NAME MUMPS_upstream
+  URL ${url}
+  DOWNLOAD_ONLY TRUE
+)
 
 # --- MUMPS build
 
@@ -149,7 +153,7 @@ endif()
 
 # --- feature summary
 
-message(STATUS "Configured MUMPS ${MUMPS_UPSTREAM_VERSION} source in ${mumps_SOURCE_DIR}")
+message(STATUS "Configured MUMPS ${MUMPS_UPSTREAM_VERSION} source in ${MUMPS_upstream_SOURCE_DIR}")
 
 include(cmake/summary.cmake)
 

@@ -1,4 +1,4 @@
-set(_l "${mumps_SOURCE_DIR}/libseq/")
+set(_l "${MUMPS_upstream_SOURCE_DIR}/libseq/")
 
 add_library(mpiseq_C OBJECT ${_l}elapse.c ${_l}mpic.c)
 

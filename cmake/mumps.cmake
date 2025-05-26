@@ -1,12 +1,12 @@
-set(_mi ${mumps_SOURCE_DIR}/include/)
-set(_s ${mumps_SOURCE_DIR}/src/)
+set(_mi ${MUMPS_upstream_SOURCE_DIR}/include/)
+set(_s ${MUMPS_upstream_SOURCE_DIR}/src/)
 
 # -- generated MUMPS_INTSIZE header
 if(MUMPS_UPSTREAM_VERSION VERSION_GREATER_EQUAL 5.5)
   if(MUMPS_intsize64)
-    set(intsrc ${mumps_SOURCE_DIR}/src/mumps_int_def64_h.in)
+    set(intsrc ${MUMPS_upstream_SOURCE_DIR}/src/mumps_int_def64_h.in)
   else()
-    set(intsrc ${mumps_SOURCE_DIR}/src/mumps_int_def32_h.in)
+    set(intsrc ${MUMPS_upstream_SOURCE_DIR}/src/mumps_int_def32_h.in)
   endif()
   configure_file(${intsrc} ${_mi}mumps_int_def.h COPYONLY)
 else()
@@ -113,7 +113,7 @@ endif()
 
 foreach(t IN ITEMS mumps_common mumps_common_C mumps_common_Fortran)
   target_include_directories(${t} PUBLIC
-  "$<BUILD_INTERFACE:${mumps_SOURCE_DIR}/src;${mumps_SOURCE_DIR}/include;${NUMERIC_INC}>"
+  "$<BUILD_INTERFACE:${MUMPS_upstream_SOURCE_DIR}/src;${MUMPS_upstream_SOURCE_DIR}/include;${NUMERIC_INC}>"
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   )
 
@@ -217,7 +217,7 @@ foreach(t IN ITEMS ${a}mumps ${a}mumps_C ${a}mumps_Fortran)
   $<$<AND:$<COMPILE_LANGUAGE:Fortran>,$<NOT:$<BOOL:${MUMPS_scalapack}>>>:NOSCALAPACK>
   )
   target_include_directories(${t} PUBLIC
-  "$<BUILD_INTERFACE:${mumps_SOURCE_DIR}/include;${NUMERIC_INC}>"
+  "$<BUILD_INTERFACE:${MUMPS_upstream_SOURCE_DIR}/include;${NUMERIC_INC}>"
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   )
   target_link_libraries(${t} PUBLIC mumps_common)
